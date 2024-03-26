@@ -7,28 +7,28 @@ services:
     volumes:
       - ~/apps/mongo:/data/db
   banking-service:
-    build: ./banking-service
+    build: ./proactive-banking-service
     ports:
       - "8080:8080"
     depends_on:
       - mongodb
-      - user-notification-service
-      - reporting-service
-      - account-management-service
+      - proactive-user-notification-service
+      - proactive-reporting-service
+      - proactive-account-management-service
   user-notification-service:
-    build: ./user-notification-service
+    build: ./proactive-user-notification-service
     ports:
       - "8081:8081"
     depends_on:
       - mongodb
   reporting-service:
-    build: ./reporting-service
+    build: ./proactive-reporting-service
     ports:
       - "8082:8082"
     depends_on:
       - mongodb
   account-management-service:
-    build: ./account-management-service
+    build: ./proactive-account-management-service
     ports:
       - "8083:8083"
     depends_on:
