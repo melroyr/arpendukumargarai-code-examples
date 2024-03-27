@@ -1,0 +1,62 @@
+services:
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
+    deploy:
+      resources:
+        limits:
+            memory: "1g"
+  proactive-user-notification-service:
+    build: ./proactive-user-notification-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    deploy:
+      resources:
+        limits:
+            memory: "1g"
+    environment:
+        - JVM_OPTS=-Xmx1g -Xms1g -XX:MaxPermSize=1024m
+  proactive-reporting-service:
+    build: ./proactive-reporting-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mongodb
+    deploy:
+      resources:
+        limits:
+            memory: "1g"
+    environment:
+        - JVM_OPTS=-Xmx1g -Xms1g -XX:MaxPermSize=1024m
+  proactive-account-management-service:
+    build: ./proactive-account-management-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mongodb
+    deploy:
+      resources:
+        limits:
+            memory: "1g"
+    environment:
+        - JVM_OPTS=-Xmx1g -Xms1g -XX:MaxPermSize=1024m
+  proactive-banking-service:
+    build: ./proactive-banking-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+      - proactive-user-notification-service
+      - proactive-reporting-service
+      - proactive-account-management-service
+    deploy:
+      resources:
+        limits:
+            memory: "1g"
+    environment:
+        - JVM_OPTS=-Xmx1g -Xms1g -XX:MaxPermSize=1024m

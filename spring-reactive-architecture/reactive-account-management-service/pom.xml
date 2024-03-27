@@ -11,7 +11,7 @@
 	<groupId>io.reflectoring</groupId>
 	<artifactId>reactive-account-management-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>account-management-service</name>
+	<name>reactive-account-management-service</name>
 	<description>Spring Boot microservice to manage User accounts per transaction</description>
 
 	<properties>
