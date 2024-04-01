@@ -4,6 +4,9 @@ server:
 # Configure Spring specific properties
 spring:
 
+  application:
+    name: account-service
+
   # Enable/Disable hot swapping
   devtools:
     restart:
@@ -16,23 +19,14 @@ spring:
       authentication-database: admin
       uri: mongodb://localhost:27017/proactive
       database: proactive
-
-  # Kafka Configuration
+  
   cloud:
-    function:
-      definition: consumeTransaction
-    stream:
-      kafka:
-        binder:
-          brokers: vlab045701.dom045700.lab:9092
-          autoCreateTopics: false
-      bindings:
-        consumeTransaction-in-0:
-          consumer:
-            max-attempts: 3
-            back-off-initial-interval: 100
-          destination: transactions
-          group: account-management
-          concurrency: 1
-        transaction-out-0:
-          destination: transactions
+    config:
+      enabled:
+        false
+      
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://localhost:8761/eureka

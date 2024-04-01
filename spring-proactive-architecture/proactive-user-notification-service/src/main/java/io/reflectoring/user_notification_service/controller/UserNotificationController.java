@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/notify")
+@RequestMapping("/banking")
 public class UserNotificationController {
 
   @Autowired
   private UserNotificationService userNotificationService;
 
-  @PostMapping("/fraudulent-transaction")
+  @PostMapping("/fraud")
   public ResponseEntity<Transaction> notify(@RequestBody Transaction transaction) {
     log.info("Process transaction with details and notify user: {}", transaction);
     Transaction processed = userNotificationService.notify(transaction);

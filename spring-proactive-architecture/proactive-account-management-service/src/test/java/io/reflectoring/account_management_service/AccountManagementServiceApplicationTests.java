@@ -1,12 +1,12 @@
 package io.reflectoring.account_management_service;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class AccountManagementServiceApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

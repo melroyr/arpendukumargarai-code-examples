@@ -1,0 +1,81 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+      
+info:
+  app:
+    description: '@project.description@'
+    name: '@project.name@'
+  version: '@project.version@'
+  
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      base-path: /${spring.application.name}
+      exposure:
+        include:
+        - features
+        - info
+        - health
+      
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        failureRateThreshold: 90
+        
+server:
+  port: 8085
+  servlet:
+    context-path: /${spring.application.name}
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    org.springframework.http.server.reactive: INFO
+    org.springframework.web.reactive: INFO
+    org.springframework.boot.autoconfigure.web: INFO
+    reactor.netty: INFO
+    
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+      routes:
+      - id: stock-service
+        uri: http://localhost:8083/api-gateway/stock-service
+        predicates:
+        - Path=/api-gateway/stock/**
+        filters:
+          - RewritePath=/stock/(?<segment>.*), /stock-service/$\{segment}
+      - id: sip-service
+        uri: http://localhost:8084/api-gateway/sip-service
+        predicates:
+        - Path=/api-gateway/sip/**
+        filters:
+        - RewritePath=/sip/(?<segment>.*), /sip-service/$\{segment}
+  data:
+    mongodb:
+      database: auth_db
+      uri: mongodb://localhost:27017/mongo?directConnection=true&serverSelectionTimeoutMS=2000
+  webflux:
+    base-path: /${spring.application.name}
+    problemdetails:
+      enabled: true
+  threads:
+    virtual:
+      enabled: true
+      
+zakura:
+  app:
+    secret-key: ecf1222c-88fd-47f3-988f-bdd78bade1ad
+    validityInMs: 6000000

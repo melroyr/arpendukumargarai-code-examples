@@ -19,7 +19,7 @@ public class AccountManagementController {
   @Autowired
   private AccountManagementService accountManagementService;
 
-  @PostMapping("/process")
+  @PostMapping("/account")
   public ResponseEntity<Transaction> manage(@RequestBody Transaction transaction) {
     log.info("Process transaction with details: {}", transaction);
     Transaction processed = accountManagementService.manage(transaction);
