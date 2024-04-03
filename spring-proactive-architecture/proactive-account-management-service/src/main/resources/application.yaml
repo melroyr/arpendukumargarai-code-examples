@@ -1,0 +1,10 @@
+server:
+  port: 6002
+spring:
+  profiles:
+    active: development, default
+  config:
+    import: optional:configserver:http://localhost:8888
+  application:
+    name: account-service
+

@@ -1,0 +1,46 @@
+server:
+  port: 7000
+spring:  
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      routes:
+        - id: accounts
+          uri: lb://account-service
+          predicates:
+            - Path=/banking/account/**
+
+        - id: banking
+          uri: lb://banking-service
+          predicates:
+            - Path=/banking/process/**
+
+        - id: reporting
+          uri: lb://reporting-service
+          predicates:
+            - Path=/banking/report/**
+
+        - id: users
+          uri: lb://user-service
+          predicates:
+            - Path=/banking/fraud/**
+
+  application:
+    name: api-gateway
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://localhost:8761/eureka
