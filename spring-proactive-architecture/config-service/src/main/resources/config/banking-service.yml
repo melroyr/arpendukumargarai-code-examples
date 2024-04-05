@@ -1,11 +1,16 @@
 server:
-  port: 8083
+  port: 8082
 
 # Configure Spring specific properties
 spring:
 
+  cloud:
+    config:
+      enabled:
+        false
+
   application:
-    name: account-service
+    name: banking-service
 
   # Enable/Disable hot swapping
   devtools:
@@ -19,14 +24,9 @@ spring:
       authentication-database: admin
       uri: mongodb://localhost:27017/proactive
       database: proactive
-  
-  cloud:
-    config:
-      enabled:
-        false
-      
+
 eureka:
   client:
     service-url:
       defaultZone:
-        http://localhost:8761/eureka
+        http://localhost:8061/eureka

@@ -18,11 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 public class TransactionService {
   
   private static final String USER_NOTIFICATION_SERVICE_URL =
-      "http://localhost:7000/banking/fraud";
+      "http://localhost:8060/banking/fraud";
   private static final String REPORTING_SERVICE_URL =
-      "http://localhost:7000/banking/report";
+      "http://localhost:8060/banking/report";
   private static final String ACCOUNT_MANAGER_SERVICE_URL =
-      "http://localhost:7000/banking/account";
+      "http://localhost:8060/banking/account";
 
   @Autowired
   private TransactionRepository transactionRepo;

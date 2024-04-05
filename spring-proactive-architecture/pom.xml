@@ -27,9 +27,6 @@
 		<module>config-service</module>
         <module>discovery-service</module>
 		<module>gateway-service</module>
-		<module>proactive-config-service</module>
-        <module>proactive-discovery-service</module>
-		<module>proactive-gateway-service</module>
         
         <module>proactive-account-management-service</module>
         <module>proactive-banking-service</module>
